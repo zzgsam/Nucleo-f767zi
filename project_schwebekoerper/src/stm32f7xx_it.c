@@ -21,7 +21,7 @@ extern	TIM_HandleTypeDef    Tim4;
 extern I2C_HandleTypeDef I2c1Handle;
 extern uint32_t Capture_old ;
 extern uint32_t Capture_new ;
-extern uint32_t Capture_frequency ;
+extern float Capture_frequency ;
 extern uint32_t Capture_value ;
 extern uint32_t Period_TIM4 ;
 extern uint32_t Prescaler_TIM4 ;
@@ -168,7 +168,7 @@ void TIM4_IRQHandler(void)
 				}
 				/* Frequency computation: for this example TIMx (TIM1) is clocked by
 				2xAPB2Clk */      
-				Capture_frequency = (2*HAL_RCC_GetPCLK1Freq()) / Capture_value/ (Prescaler_TIM4+1);
+				Capture_frequency = (float)(2*HAL_RCC_GetPCLK1Freq()) / Capture_value/ (Prescaler_TIM4+1) * 60;
 				Capture_old = Capture_new;
 			}
 		}
